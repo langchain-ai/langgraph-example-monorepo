@@ -1,0 +1,7 @@
+{
+    "dependencies": ["."],
+    "graphs": {
+      "my_fantastic_agent": "./my_agent/main.py:graph"
+    },
+    "env": "./.env"
+  }
