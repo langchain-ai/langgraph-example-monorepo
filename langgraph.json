@@ -1,7 +1,8 @@
 {
-    "dependencies": ["."],
+    "dependencies": ["./all_projects/my_project/project_one","./all_projects/project_two"],
     "graphs": {
-      "my_fantastic_agent": "./my_agent/main.py:graph"
+      "my_first_agent": "./all_projects/my_project/project_one/my_agent/main.py:graph",
+      "my_second_agent": "./all_projects/project_two/my_other_agent/main.py:graph"
     },
     "env": "./.env"
   }
