@@ -2,7 +2,6 @@ from typing import TypedDict, Annotated, Sequence, Literal
 
 from functools import lru_cache
 from langchain_core.messages import BaseMessage
-from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import ToolNode
@@ -12,10 +11,12 @@ tools = [TavilySearchResults(max_results=1)]
 
 @lru_cache(maxsize=4)
 def _get_model(model_name: str):
-    if model_name == "openai":
+    if model_name == "gpt-4o":
         model = ChatOpenAI(temperature=0, model_name="gpt-4o")
-    elif model_name == "anthropic":
-        model =  ChatAnthropic(temperature=0, model_name="claude-3-sonnet-20240229")
+    elif model_name == "gpt-4o-mini":
+        model =  ChatOpenAI(temperature=0, model_name="gpt-4o-mini")
+    elif model_name == "gpt-3.5-turbo":
+        model = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-0125")
     else:
         raise ValueError(f"Unsupported model type: {model_name}")
 
@@ -57,7 +58,7 @@ tool_node = ToolNode(tools)
 
 # Define the config
 class GraphConfig(TypedDict):
-    model_name: Literal["anthropic", "openai"]
+    model_name: Literal["gpt-4o", "gpt-4o-mini","gpt-3.5-turbo"]
 
 
 # Define a new graph
